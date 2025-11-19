@@ -1,6 +1,7 @@
 import { SourceMapGenerator } from "source-map-js";
-import { Extracted } from "../loaders/types";
+
 import { mm } from "./sourcemap";
+import { Extracted } from "../loaders/types";
 
 interface Concatenated {
   css: string;
@@ -22,14 +23,16 @@ export default async function (extracted: Extracted[]): Promise<Concatenated> {
     const consumer = _map.toConsumer();
     if (!consumer) continue;
 
-    consumer.eachMapping(m =>
-      sm.addMapping({
-        generated: { line: offset + m.generatedLine, column: m.generatedColumn },
-        original: { line: m.originalLine, column: m.originalColumn },
-        source: m.source,
-        name: m.name,
-      }),
-    );
+    consumer.eachMapping(m => {
+      if (m.originalLine != null && m.originalColumn != null) {
+        sm.addMapping({
+          generated: { line: offset + m.generatedLine, column: m.generatedColumn },
+          original: { line: m.originalLine, column: m.originalColumn },
+          source: m.source,
+          name: m.name,
+        });
+      }
+    });
 
     if (data.sourcesContent) {
       for (const source of data.sources) {

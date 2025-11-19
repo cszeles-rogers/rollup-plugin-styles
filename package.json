@@ -50,9 +50,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@rollup/pluginutils": "^4.1.2",
+    "@rollup/pluginutils": "^5.3.0",
     "cosmiconfig": "^7.0.1",
-    "cssnano": "^5.0.16",
+    "cssnano": "^7.1.2",
     "fs-extra": "^10.0.0",
     "icss-utils": "^5.1.0",
     "mime-types": "^2.1.34",
@@ -75,13 +75,12 @@
     "@babel/preset-env": "^7.16.11",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
-    "@commitlint/prompt-cli": "^16.1.0",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "@rollup/plugin-replace": "^3.0.1",
-    "@rollup/plugin-typescript": "^8.3.0",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-replace": "^6.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/fs-extra": "^9.0.13",
@@ -110,12 +109,12 @@
     "node-sass": "^7.0.1",
     "postcss-custom-properties": "^12.1.3",
     "prettier": "^2.5.1",
-    "rollup": "^2.66.1",
-    "rollup-plugin-dts": "^4.1.0",
-    "rollup-plugin-lit-css": "^3.2.1",
-    "rollup-plugin-node-externals": "^3.1.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.49.0",
+    "rollup": "^4.53.3",
+    "rollup-plugin-dts": "^6.2.3",
+    "rollup-plugin-lit-css": "^6.0.0",
+    "rollup-plugin-node-externals": "^8.1.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "sass": "^1.94.1",
     "semantic-release": "^19.0.2",
     "shx": "^0.3.4",
     "stylus": "^0.56.0",
@@ -126,9 +125,9 @@
     "typescript": "^4.5.5"
   },
   "peerDependencies": {
-    "rollup": "^2.63.0"
+    "rollup": "^4.53.3"
   },
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=20.0.0"
   }
 }

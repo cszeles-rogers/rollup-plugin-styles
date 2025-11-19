@@ -1,10 +1,11 @@
-import * as postcss from "postcss";
 import cssnano from "cssnano";
-import { ImportOptions } from "./loaders/postcss/import";
-import { UrlOptions } from "./loaders/postcss/url";
-import { ModulesOptions } from "./loaders/postcss/modules";
-import { SASSLoaderOptions } from "./loaders/sass";
+import * as postcss from "postcss";
+
 import { LESSLoaderOptions } from "./loaders/less";
+import { ImportOptions } from "./loaders/postcss/import";
+import { ModulesOptions } from "./loaders/postcss/modules";
+import { UrlOptions } from "./loaders/postcss/url";
+import { SASSLoaderOptions } from "./loaders/sass";
 import { StylusLoaderOptions } from "./loaders/stylus";
 import { SourceMapOptions, Loader } from "./loaders/types";
 
@@ -200,7 +201,7 @@ export interface Options {
    * [cssnano](https://github.com/cssnano/cssnano)
    * @default false
    */
-  minimize?: boolean | cssnano.CssNanoOptions;
+  minimize?: boolean | cssnano.Options;
   /**
    * Enable/disable or configure sourcemaps
    * @default false

@@ -1,21 +1,23 @@
-import path from "path";
-import fs from "fs-extra";
-import { RawSourceMap } from "source-map-js";
-import { makeLegalIdentifier } from "@rollup/pluginutils";
-import postcss, { AcceptedPlugin, ProcessOptions } from "postcss";
 import cssnano from "cssnano";
+import fs from "fs-extra";
+import path from "path";
+import postcss, { AcceptedPlugin, ProcessOptions } from "postcss";
+import { RawSourceMap } from "source-map-js";
+
+import { makeLegalIdentifier } from "@rollup/pluginutils";
+import loadConfig from "./config";
+import postcssICSS from "./icss";
+import postcssImport from "./import";
+import postcssModules from "./modules";
+import postcssNoop from "./noop";
+import postcssUrl from "./url";
 import { PostCSSLoaderOptions, InjectOptions } from "../../types";
+import { Loader } from "../types";
+
 import { humanlizePath, normalizePath } from "../../utils/path";
-import { mm } from "../../utils/sourcemap";
 import { resolveAsync } from "../../utils/resolve";
 import safeId from "../../utils/safe-id";
-import { Loader } from "../types";
-import loadConfig from "./config";
-import postcssImport from "./import";
-import postcssUrl from "./url";
-import postcssModules from "./modules";
-import postcssICSS from "./icss";
-import postcssNoop from "./noop";
+import { mm } from "../../utils/sourcemap";
 
 let injectorId: string;
 const testing = process.env.NODE_ENV === "test";
@@ -98,7 +100,7 @@ const loader: Loader<PostCSSLoaderOptions> = {
     for (const msg of res.messages)
       switch (msg.type) {
         case "warning":
-          this.warn({ name: msg.plugin, message: msg.text as string });
+          this.warn({ message: msg.text as string });
           break;
 
         case "icss":

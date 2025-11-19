@@ -1,6 +1,6 @@
+import fs from "fs-extra";
 /* eslint-disable jest/no-export */
 import path from "path";
-import fs from "fs-extra";
 import { Plugin, rollup, InputOptions, OutputOptions } from "rollup";
 
 import styles from "../../src";
@@ -48,7 +48,7 @@ export async function write(data: WriteData): Promise<WriteResult> {
     plugins: data.plugins ?? [styles(data.options)],
     onwarn: (warning, warn) => {
       if (warning.code === "EMPTY_BUNDLE") return;
-      if (warning.source === "lit") return;
+      if (warning.id && warning.id.includes("lit")) return;
       if (/Exported `\S+` as `\S+` in \S+/.test(warning.message)) return;
       warn(warning);
     },

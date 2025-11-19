@@ -1,16 +1,16 @@
-import { readdirSync } from "fs-extra";
-
-import { terser } from "rollup-plugin-terser";
-import { babel } from "@rollup/plugin-babel";
-import commonjs from "@rollup/plugin-commonjs";
+import { readdirSync } from "fs";
 import dts from "rollup-plugin-dts";
 import externals from "rollup-plugin-node-externals";
-import json from "@rollup/plugin-json";
-import replace from "@rollup/plugin-replace";
-import resolve from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
 
-import pkg from "./package.json";
+import { babel } from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
+import resolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
+import  terser  from "@rollup/plugin-terser";
+import typescript from "@rollup/plugin-typescript";
+import pkg from "./package.json" with { type: "json" };
+
 const extensions = [".ts", ".mjs", ".js", ".cjs", ".json"];
 
 /** @type {import('rollup').RollupOptions[]} */
@@ -61,10 +61,10 @@ const config = [
       dts({ respectExternal: true }),
       {
         name: "shims",
-        banner: readdirSync(`${__dirname}/src/shims`)
-          .map(s => s.replace(/\.ts$/, "").replace(/\.d$/, ""))
-          .map(s => `/// <reference types="./shims/${s}" />`)
-          .join("\n"),
+        // banner: readdirSync(`${__dirname}/src/shims`)
+        //   .map(s => s.replace(/\.ts$/, "").replace(/\.d$/, ""))
+        //   .map(s => `/// <reference types="./shims/${s}" />`)
+        //   .join("\n"),
       },
     ],
   },

@@ -1,12 +1,11 @@
 import fs from "fs-extra";
 import { rollup } from "rollup";
+import { litCss } from "rollup-plugin-lit-css";
 import { RawSourceMap } from "source-map-js";
 
+import { fixture, validateMany, write } from "./helpers";
 import styles from "../src";
 import { humanlizePath } from "../src/utils/path";
-import { litCss } from "rollup-plugin-lit-css";
-
-import { fixture, validateMany, write } from "./helpers";
 
 beforeAll(async () => fs.remove(fixture("dist")));
 
@@ -343,7 +342,7 @@ validateMany("extract", [
     title: "preserve-modules",
     input: "simple/index.js",
     options: { mode: "extract" },
-    inputOpts: { preserveModules: true },
+    inputOpts: { preserveModules: true } as any,
   },
   {
     title: "absolute-path-fail",
@@ -585,7 +584,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: { preserveModules: true },
+    inputOpts: { preserveModules: true } as any,
   },
   {
     title: "preserve-modules-single",
@@ -595,7 +594,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: { preserveModules: true },
+    inputOpts: { preserveModules: true } as any,
   },
   {
     title: "preserve-modules-multi-entry",
@@ -605,7 +604,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: { preserveModules: true },
+    inputOpts: { preserveModules: true } as any,
   },
   {
     title: "multi-entry",
@@ -633,7 +632,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: {
+    outputOpts: {
       manualChunks(id) {
         if (id.includes("third")) return "thirds";
         if (id.includes("fourth")) return "fourts";
@@ -650,7 +649,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: {
+    outputOpts: {
       manualChunks(id) {
         if (id.includes("third")) return "thirds";
         if (id.includes("fourth")) return "fourts";
@@ -667,7 +666,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: {
+    outputOpts: {
       manualChunks(id) {
         if (id.includes("third")) return "thirds";
         if (id.includes("fourth")) return "fourts";
@@ -684,7 +683,7 @@ validateMany("code-splitting", [
       modules: true,
       sourceMap: true,
     },
-    inputOpts: {
+    outputOpts: {
       manualChunks(id) {
         if (id.includes("third")) return "thirds";
         if (id.includes("fourth")) return "fourts";

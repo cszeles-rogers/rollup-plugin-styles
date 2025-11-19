@@ -1,13 +1,13 @@
-import path from "path";
-import { Plugin, OutputChunk, OutputAsset } from "rollup";
-import { createFilter } from "@rollup/pluginutils";
-import { Processor } from "postcss";
 import cssnano from "cssnano";
+import path from "path";
+import { Processor } from "postcss";
+import { Plugin, OutputChunk, OutputAsset } from "rollup";
+
+import { createFilter } from "@rollup/pluginutils";
+import Loaders from "./loaders";
 import { LoaderContext, Extracted } from "./loaders/types";
 import { ExtractedData, Options, PostCSSLoaderOptions } from "./types";
-import Loaders from "./loaders";
-import { humanlizePath, normalizePath, isAbsolutePath, isRelativePath } from "./utils/path";
-import { mm } from "./utils/sourcemap";
+
 import concat from "./utils/concat";
 import {
   inferOption,
@@ -18,6 +18,8 @@ import {
   ensurePCSSOption,
   ensurePCSSPlugins,
 } from "./utils/options";
+import { humanlizePath, normalizePath, isAbsolutePath, isRelativePath } from "./utils/path";
+import { mm } from "./utils/sourcemap";
 
 export default (options: Options = {}): Plugin => {
   const isIncluded = createFilter(options.include, options.exclude);
@@ -304,7 +306,18 @@ export default (options: Options = {}): Plugin => {
             typeof opts.assetFileNames === "string"
               ? normalizePath(path.dirname(opts.assetFileNames))
               : typeof opts.assetFileNames === "function"
-              ? normalizePath(path.dirname(opts.assetFileNames(cssFile)))
+              ? normalizePath(
+                  path.dirname(
+                    opts.assetFileNames({
+                      type: "asset",
+                      name: res.name,
+                      names: [res.name],
+                      originalFileName: null,
+                      originalFileNames: [],
+                      source: res.css,
+                    }),
+                  ),
+                )
               : "assets"; // Default for Rollup v2
 
           const map = mm(res.map)
